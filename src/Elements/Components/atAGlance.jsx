@@ -1,14 +1,12 @@
 import React from 'react';
 import Card from './card';
 import UserContext from '../Context/userContext';
-import UserHistoryEntry from '../history';
 
 function AtAGlance() {
-	const ctx = React.useContext(UserContext);
-	const {user, setUser} = React.useContext(UserContext);
-	const lastActivity = ctx.user.history[ctx.user.history.length - 1]
-	// console.log('plucked values: User: ', user)
-	// console.log('AT A GLANCE ctx: ', ctx)
+	// const ctx = React.useContext(UserContext);
+	const { user } = React.useContext(UserContext);
+	const lastActivity = user.history[user.history.length - 1]
+	// console.log('AT A GLANCE plucked values: User: ', user)
 
 	function Rows() {
 		 return (
@@ -63,7 +61,7 @@ function AtAGlance() {
 				headercolor="text-white"
 				header="Your Account At A Glance"
 				text={(<>
-					<h5 className="text-center">Balance: <span className="text-primary">${ctx.user.balance}</span><br></br></h5>
+					<h3 className="text-center">Balance: <span className="text-primary">${user.balance}</span><br></br></h3>
 					<p className="text-center mt-3 mb-1">Latest Activity:</p>
 					{latestActivity()}
 				</>)}

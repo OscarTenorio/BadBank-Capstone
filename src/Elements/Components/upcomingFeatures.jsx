@@ -18,7 +18,7 @@ function NewFeatures() {
 								&#8594; Enrollment in different account types<br></br>
 								&#8594; Test coverage using Jest<br></br>
 								&#8594; Different authentication levels for users<br></br>
-								&#8594; Login Error Handling<br></br>
+								&#8594; Login Error Handling
 								<br></br>
 							</p>
 						</span>

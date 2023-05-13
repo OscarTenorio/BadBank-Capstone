@@ -56,7 +56,6 @@ function update(type, name, email, amount, balance, timestamp) {
                 { $inc: { balance: intAmount } },
                 { returnOriginal: false },
                 function (err, documents) {
-                    console.log(`ERROR:`, err);
                     err ? reject(err) : resolve(documents);
                 }
             );

@@ -51,14 +51,14 @@ function Login() {
 
 		if (!validate(email, 		'email')) return;
 		if (!validate(password, 'password')) return;
-		console.log("HANDLE LOGIN: Email: ",String(email),", Password: ",String(password));
+		// console.log("HANDLE LOGIN: Email: ",String(email),", Password: ",String(password));
 
 		//atttempt login with db credentials =======================
 		(async () => {
 			var res = await fetch(endpointUrl + `/account/login/${email}/${password}`);
 			var jsonResponse = await res.json();
 			
-			// throw error if login failed
+			// throw error if login failed <--- currently does not work
 			if (JSON.stringify(jsonResponse).includes('failed')){
 				setStatus('Email or Password are incorrect');
 				setTimeout(() => setStatus('* Required'), 5000);
@@ -70,7 +70,7 @@ function Login() {
 				setTimeout(() => {
 					setUser({name:jsonResponse.name, email:jsonResponse.email, password:jsonResponse.password, balance:jsonResponse.balance, history:jsonResponse.history});
 				}, 5000);
-				console.log('JSON Response History: ', jsonResponse.history);
+				// console.log('JSON Response History: ', jsonResponse.history);
 			};
 		})();
 	};

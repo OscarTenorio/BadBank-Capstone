@@ -1,21 +1,20 @@
 import React from 'react';
 
-function AllData() {
+function AllUsersHistoryData() {
 	const endpointUrl = 'http://localhost:3001';
-	const [data, setData] = React.useState('');
-	// const userObject = ctx.user
+	const [data, setData] = React.useState(null);
 
-	// React.useEffect(() => {
-		// fetch all accounts from API
-	// 	(async () => {
-	// 	fetch(endpointUrl + '/account/all')
-	// 		.then(response => response.json())
-	// 		.then(data => {
-	// 			console.log('DATA: ', data)
-	// 			setData(JSON.stringify(data))
-	// 	})
-	// })
-	// , []);
+
+	// db query ========================
+	React.useEffect(() => {
+	const fetchData = async () => {
+		var res = await fetch(endpointUrl + '/account/all');
+		var jsonResponse = await res.json();
+		// console.log('DATA jsonResponse: ', jsonResponse);
+		setData(jsonResponse);
+	}
+	fetchData().catch(console.error);
+	}, []);
 
 	// ============================================== UserHistoryEntry()
 	function UserHistoryEntry(props) {
@@ -56,7 +55,7 @@ function AllData() {
 					<tbody>
 						{ 
 							props.user.history.map((value, index) => {
-								return (<UserHistoryEntry historyentry={value} key={index} id={index}/>)
+								return (<UserHistoryEntry historyentry={value} key={index + 1} id={index + 1}/>)
 							})
 						}
 					</tbody>
@@ -78,10 +77,10 @@ function AllData() {
 	function AllUsersHistory(props) {
 		// generates a history table per user
 
-		return props.users.map((user, index) => {
+		return props.data.map((user, index) => {
 			return (
 				<div style={{overflow:"scroll"}}>
-					<UserHistoryTable user={user} key={index} id={index}/>
+					<UserHistoryTable user={user} key={index + 1} id={index + 1}/>
 				</div>
 			)
 		})
@@ -93,12 +92,12 @@ function AllData() {
 	return (
 		<>
 			<div className="p-5">
-				<h1 className="text-center mb-0">All Data</h1>
+				<h1 className="text-center mb-0">All Activity Data</h1>
 				<p className="text-center font-italic mb-4">across all accounts</p>
-				<AllUsersHistory data={data} key={1} id={1}/>
+				{ data && <AllUsersHistory data={data} key={1} id={1}/>}
 			</div>
 		</>
 	);
 }; // end AllData()
 
-export default AllData;
+export default AllUsersHistoryData;

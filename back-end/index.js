@@ -98,7 +98,7 @@ app.get('/account/all', function (req, res) {
 
     dal.all().
         then((docs) => {
-            console.log(docs);
+            console.log('LINE 101 index.js: ', docs);
             res.send(docs);
     });
 });

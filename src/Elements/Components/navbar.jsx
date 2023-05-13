@@ -58,7 +58,7 @@ function NavBar() {
           <a className={className(historyIsActive)} name="History" href="#/balancehistory/" onClick={toggleHistoryActive}>History</a>
         </li>
         <li className="nav-item">
-          <a className={className(allDataIsActive)} name="AllData" href="#/alldata/" onClick={toggleAllDataActive}>All User Data</a>
+          <a className={className(allDataIsActive)} name="AllData" href="#/alldata/" onClick={toggleAllDataActive}>All Users Data</a>
         </li>
       </ul>
     </>

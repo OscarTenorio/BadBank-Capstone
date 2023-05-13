@@ -7,7 +7,7 @@ import LoggedIn from './loggedIn';
 import NavBar from './Components/navbar';
 import Depositwithdraw from "./depositwithdraw";
 import History from "./history";
-import AllData from './allData';
+import AllUsersHistoryData from './allUsersHistoryData';
 import UserContext from './Context/userContext';
 import LoggedInUser from './Components/loggedInUser';
 import ReferenceLinks from './Components/referencelinks';
@@ -33,7 +33,7 @@ function Spa() {
             { Object.keys(userValue.user).length > 0 ? (<Route path="/" element={<LoggedIn user={userValue}/>} exact/>) : (<Route path="/" element={<NotLoggedIn/>} exact/>)}
             <Route path="/depositwithdraw/" element={<Depositwithdraw/>}/>
             <Route path="/balancehistory/" element={<History/>}/>
-            <Route path="/alldata/" element={<AllData/>}/>
+            <Route path="/alldata/" element={<AllUsersHistoryData/>}/>
           </Routes>
         </UserContext.Provider>
       </HashRouter>

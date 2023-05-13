@@ -21,12 +21,12 @@ function Depositwithdraw() {
 
 	function validate(field, label) {
 		if (label == 'deposit' && !field || field < 0) {
-			setDepositStatus('ERROR: Please enter a ' + label + ' amount number');
+			setDepositStatus('ERROR: Please enter a ' + label + ' amount number greater than 0');
 			setTimeout(() => setDepositStatus(''), 5000);
 			return false;
 		}
-		if (label == 'withdraw' && !field) {
-			setWithdrawStatus('ERROR: Please enter a ' + label + ' amount number');
+		if (label == 'withdraw' && !field || field < 0) {
+			setWithdrawStatus('ERROR: Please enter a ' + label + ' amount number greater than 0');
 			setTimeout(() => setWithdrawStatus(''), 5000);
 			return false;
 		} else if (label == 'withdraw' && field > user.balance) {
@@ -43,7 +43,6 @@ function Depositwithdraw() {
 	function handleDeposit() {
 		let now = String(new Date()).substr(0, 21)
 		let formattedTimestamp = now.substring(0, 15) + " @" + now.substring(15, now.length)
-		let last = user.history.length - 1
 
 		if (!validate(deposit, 'deposit')) {
 			clearForm();
@@ -61,10 +60,13 @@ function Depositwithdraw() {
 		}
 		user.history.push(historyEntry);
 		setShowDesposit(false);
+
+
+		let latestHistoryEntry = user.history[user.history.length - 1]
 		// enter deposit into DB =======================================
 		(async () => {
-			var res = await fetch(endpointUrl + `/account/update/Deposit/${user.history[last].name}/${user.history[last].email}/
-				${user.history[last].amount}/${user.history[last].balance}/${user.history[last].timestamp}`);
+			var res = await fetch(endpointUrl + `/account/update/Deposit/${latestHistoryEntry.name}/${latestHistoryEntry.email}/
+				${latestHistoryEntry.amount}/${latestHistoryEntry.balance}/${latestHistoryEntry.timestamp}`);
 			var jsonResponse = await res.json();
 			console.log('DEPOSIT JSON response: ',jsonResponse);
 		})();
