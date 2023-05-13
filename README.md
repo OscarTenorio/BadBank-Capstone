@@ -34,6 +34,7 @@ The project is called Bad Bank - simply because security was not a concern when 
  <li>Express</li>
  <li>Bootstrap</li>
  <li>Docker</li>
+ <li>Digital Ocean</li>
 </ul>
 
 <br><br>

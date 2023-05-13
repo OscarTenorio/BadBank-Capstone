@@ -1,5 +1,5 @@
 import React from 'react';
-import UserContext from './userContext';
+import UserContext from '../Context/userContext';
 import Card from './card';
 
 function Login() {
@@ -83,6 +83,7 @@ function Login() {
 				setTimeout(() => {
 					setUser({name:jsonResponse.name, email:jsonResponse.email, password:jsonResponse.password, balance:jsonResponse.balance, history:jsonResponse.history});
 				}, 5000);
+				console.log('JSON Response History: ', jsonResponse.history);
 			};
 		})();
 	};

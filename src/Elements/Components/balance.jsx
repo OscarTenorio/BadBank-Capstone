@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from './card';
-import UserContext from './userContext';
+import UserContext from '../Context/userContext';
 
 function Balance() {
-	const {user, setUser} = React.useContext(UserContext);
-	console.log('BALANCE user balance: ', user.balance)
+	const {user} = React.useContext(UserContext);
+	// console.log('BALANCE user balance: ', user.balance)
 
 	return(
 		<Card

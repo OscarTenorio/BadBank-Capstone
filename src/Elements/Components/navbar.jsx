@@ -6,6 +6,7 @@ function NavBar() {
   const [homeIsActive, setHomeIsActive]       = React.useState(true);
   const [depwithIsActive, setDepwithIsActive] = React.useState(false);
   const [historyIsActive, setHistoryIsActive] = React.useState(false);
+  const [allDataIsActive, setAllDataIsActive] = React.useState(false);
 
 
   // sorry it's a bit hardcoded, running into too-many-re-render errors so had to try this
@@ -13,18 +14,28 @@ function NavBar() {
     setHomeIsActive(true);
     setDepwithIsActive(false);
     setHistoryIsActive(false);
+    setAllDataIsActive(false);
   }
 
   function toggleDepwithActive(){
     setHomeIsActive(false);
     setDepwithIsActive(true);
     setHistoryIsActive(false);
+    setAllDataIsActive(false);
   }
 
   function toggleHistoryActive(){
     setHomeIsActive(false);
     setDepwithIsActive(false);
     setHistoryIsActive(true);
+    setAllDataIsActive(false);
+  }
+
+  function toggleAllDataActive(){
+    setHomeIsActive(false);
+    setDepwithIsActive(false);
+    setHistoryIsActive(false);
+    setAllDataIsActive(true);
   }
 
   function className(state){
@@ -45,6 +56,9 @@ function NavBar() {
         </li>
         <li className="nav-item">
           <a className={className(historyIsActive)} name="History" href="#/balancehistory/" onClick={toggleHistoryActive}>History</a>
+        </li>
+        <li className="nav-item">
+          <a className={className(allDataIsActive)} name="AllData" href="#/alldata/" onClick={toggleAllDataActive}>All User Data</a>
         </li>
       </ul>
     </>

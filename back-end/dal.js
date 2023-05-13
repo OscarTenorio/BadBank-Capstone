@@ -14,7 +14,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
 function create(name, email, password) {
     return new Promise((resolve, reject) => {
         const collection = db.collection('users');
-        console.log('DAL Collection value: ',collection);
+        console.log('DAL Collection value line 17: ',collection);
         const entry = {name: name, email: email, password: password, balance: 0, history: []};
         collection.insertOne(entry, {w:1}, function(err, result){
             err ? reject(err) : resolve(entry);
@@ -46,13 +46,31 @@ function findOne(email) {
 }
 
 // update - deposit/withdraw amount
-function update(email, amount) {
+function update(type, name, email, amount, balance, timestamp) {
+    console.log("LINE 50: attempt to set history from Update call: type:",type, "name:", name, "email:", email, "amount:", amount, "balance:", balance, "timestamp:", timestamp);
+    let intAmount = parseInt(amount);
     return new Promise((resolve, reject) => {
-        const customers = db
-            .collection('users')
+        const customers = db.collection('users')
             .findOneAndUpdate(
                 { email: email },
-                { $inc: { balance: amount } },
+                { $inc: { balance: intAmount } },
+                { returnOriginal: false },
+                function (err, documents) {
+                    console.log(`ERROR:`, err);
+                    err ? reject(err) : resolve(documents);
+                }
+            );
+        db.collection('users')
+            .findOneAndUpdate(
+                { email: email },
+                {$push: { history: {
+                    name: name,
+                    balance: balance,
+                    email: email,
+                    amount: amount,
+                    timestamp:timestamp,
+                    type: type 
+                }}},
                 { returnOriginal: false },
                 function (err, documents) {
                     err ? reject(err) : resolve(documents);
@@ -60,6 +78,21 @@ function update(email, amount) {
             );
     });
 }
+
+// { $push: { history: {
+//     name: name,
+//     balance: balance,
+//     email: email,
+//     timestamp:timestamp,
+//     type: type 
+// }}                { $push: { history: {
+//     name: name,
+//     balance: balance,
+//     email: email,
+//     timestamp:timestamp,
+//     type: type 
+// }}
+
 
 // return all users by using the collection.find method
 function all() {

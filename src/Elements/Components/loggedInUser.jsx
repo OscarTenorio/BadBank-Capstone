@@ -1,18 +1,18 @@
 import React from 'react';
-import UserContext from './userContext';
+import UserContext from '../Context/userContext';
 
 function LoggedInUser(current){
   const {user, setUser}							= React.useContext(UserContext);
-  console.log('LOGGED IN user context: ',user);
-  const userObject = current.user.user // <---- yea I gotta sort this out here
+  // console.log('LOGGED IN user context: ',user);
+  const userObject = user // <---- yea I gotta sort this out here
 
   function logout(){
-    // logout
     setUser({});
   }
 
   return (
     <div className="d-flex justify-content-end mt-3">
+      {/* vertical red line */}
       <div style={{"borderStyle":"hidden solid hidden hidden", "padding":"0px 15px", "borderColor":"red"}}>
         <h1 className="text-primary text-end">{String(userObject.name)}</h1>
         <p className="text-primary text-end">{String(userObject.email)}</p>

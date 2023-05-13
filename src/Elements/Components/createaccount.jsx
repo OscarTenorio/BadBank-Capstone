@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './card';
-import UserContext from './userContext';
+import UserContext from '../Context/userContext';
 
 function CreateAccount() {
 	const [show, setShow] 							= React.useState(true);
@@ -10,9 +10,7 @@ function CreateAccount() {
 	const [email, setEmail] 						= React.useState('');
 	const [password, setPassword] 					= React.useState('');
 	const [createButton, setCreateButton] 			= React.useState(false)
-	const {user, setUser}							= React.useContext(UserContext);
-	// const {accountCreated, setAccountCreated} 			= React.useContext(createdValue);
-
+	const {setUser}							= React.useContext(UserContext);
 
 	function validate(field, label) {					// basic validation stuff
 		if (!field) {
@@ -32,10 +30,10 @@ function CreateAccount() {
 		const endpointUrl = 'http://localhost:3001';
 
 		// validate entry =======================
-		if (!validate(name, 		'name')) return;
-		if (!validate(email, 		'email')) return;
+		if (!validate(name, 'name')) return;
+		if (!validate(email, 'email')) return;
 		if (!validate(password, 'password')) return;
-		console.log("HANDLE CREATE: Name: ",String(name),", Email: ",String(email),", Password: ",String(password));
+		// console.log("HANDLE CREATE: Name: ",String(name),", Email: ",String(email),", Password: ",String(password));
 
 		// store in db =======================
 		(async () => {
@@ -60,17 +58,8 @@ function CreateAccount() {
 			return 'btn btn-primary text-center disabled'
 	}
 
-	// function clearForm() {
-	// 	setName('');
-	// 	setEmail('');
-	// 	setPassword('');
-	// 	setCreateButton(true);
-	// 	setShowCreateAccount(false);
-	// 	setShow(true);
-	// }
-
 	function handleCreateButton() {
-		if (name.length > 1 && email.length > 1 && password.length > 1) {
+		if (name.length > 0 && email.length > 1 && password.length > 1) {
 			setCreateButton(true);
 		} else {
 			setCreateButton(false);

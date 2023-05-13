@@ -1,5 +1,5 @@
 import './App.css';
-import Spa from './Components/spa';
+import Spa from './Elements/spa';
 
 function App() {
   return (

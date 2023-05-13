@@ -77,13 +77,18 @@ app.get('/account/findOne/:email', function (req, res) {
 
 
 // update - deposit/withdraw amount
-app.get('/account/update/:email/:amount', function (req, res) {
+app.get('/account/update/:type/:name/:email/:amount/:balance/:timestamp', function (req, res) {
 
-    var amount = Number(req.params.amount);
-
-    dal.update(req.params.email, amount).
-        then((response) => {
-            console.log(response);
+    dal.update(
+		req.params.type,
+		req.params.name,
+		req.params.email,
+		req.params.amount,
+		req.params.balance,
+		req.params.timestamp
+		)
+        .then((response) => {
+            console.log("LINE 86 INDEX.JS - Update/Withdraw response: ",response);
             res.send(response);
     });    
 });

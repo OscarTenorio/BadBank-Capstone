@@ -1,15 +1,15 @@
 import React from 'react';
 import Card from './card';
-import UserContext from './userContext';
+import UserContext from '../Context/userContext';
 
 function AtAGlance() {
 	const ctx = React.useContext(UserContext);
 	const {user, setUser} = React.useContext(UserContext);
-	console.log('plucked values: User: ', user)
-	console.log('AT A GLANCE ctx: ', ctx)
+	// console.log('plucked values: User: ', user)
+	// console.log('AT A GLANCE ctx: ', ctx)
 
 	function latestActivity(){
-		console.log("latestActivity");
+		// console.log("latestActivity");
 	};
 
 	return(

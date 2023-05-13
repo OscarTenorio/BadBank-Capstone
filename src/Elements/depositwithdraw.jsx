@@ -1,13 +1,12 @@
 import React from 'react';
-import Card from './card';
-import UserContext from './userContext';
-import Balance from './balance';
-import ReferenceLinks from './referencelinks';
+import Card from './Components/card';
+import UserContext from './Context/userContext';
+import Balance from './Components/balance';
 
 
 function Depositwithdraw() {
 	const {user, setUser}				= React.useContext(UserContext);
-	console.log('DEPWITH user value: ', user)
+	// console.log('DEPWITH user value: ', user)
 	const endpointUrl = 'http://localhost:3001';
 
 	const [deposit, setDeposit] 								= React.useState(0);
@@ -42,24 +41,30 @@ function Depositwithdraw() {
 
 
 	function handleDeposit() {
+		let now = String(new Date()).substr(0, 21)
+		let formattedTimestamp = now.substring(0, 15) + " @" + now.substring(15, now.length)
+		let last = user.history.length - 1
+
 		if (!validate(deposit, 'deposit')) {
 			clearForm();
 			return
 		};
 		user.balance += parseInt(deposit);
 		// update user history =======================================
-		user.history.push({
-			name:user.name,
-			email:user.email,
-			type:"Deposit", amount:deposit,
+		var historyEntry = {
+			name: user.name,
+			email: user.email,
+			type: "Deposit",
+			amount: Math.abs(deposit),
 			balance:user.balance,
-			timestamp:new Date()
-		});
-		user.blank = false;
+			timestamp: formattedTimestamp
+		}
+		user.history.push(historyEntry);
 		setShowDesposit(false);
 		// enter deposit into DB =======================================
 		(async () => {
-			var res = await fetch(endpointUrl + `/account/update/${user.email}/${Math.abs(deposit)}`);
+			var res = await fetch(endpointUrl + `/account/update/Deposit/${user.history[last].name}/${user.history[last].email}/
+				${user.history[last].amount}/${user.history[last].balance}/${user.history[last].timestamp}`);
 			var jsonResponse = await res.json();
 			console.log('DEPOSIT JSON response: ',jsonResponse);
 		})();
@@ -67,27 +72,44 @@ function Depositwithdraw() {
 	}
 
 	function handleWithdraw() {
+		let now = String(new Date()).substr(0, 21)
+		let formattedTimestamp = now.substring(0, 15) + " @" + now.substring(15, now.length)
+		let last = user.history.length - 1
+
+
 		if (!validate(withdraw, 'withdraw')) {
 			clearForm();
 			return
 		};
 		user.balance -= parseInt(withdraw);
+		// update user history =======================================
+		var historyEntry = {
+			name: user.name,
+			email: user.email,
+			type: "Withdrawal",
+			amount: -Math.abs(withdraw),
+			balance:user.balance,
+			timestamp: formattedTimestamp
+		}
+		user.history.push(historyEntry);
+		setShowWithdraw(false);
+
 		// enter withdrawal into db =======================================
 		(async () => {
-			var res = await fetch(endpointUrl + `/account/update/${user.email}/${-Math.abs(withdraw)}`);
+			var res = await fetch(endpointUrl + `/account/update/Withdrawal/${user.history[last].name}/${user.history[last].email}/
+				${user.history[last].amount}/${user.history[last].balance}/${user.history[last].timestamp}`);
 			var jsonResponse = await res.json();
-			console.log('WITHDRAW JSON response: ',jsonResponse);
-		})();		
+			console.log('WITHDRAWAL JSON response: ',jsonResponse);
+		})();	
 
-		user.history.push({
-			name:user.name,
-			email:user.email,
-			type:"Withdrawal", amount:withdraw,
-			balance:user.balance,
-			timestamp:new Date()
-		});
-		user.blank = false;
-		setShowWithdraw(false);
+		// user.history.push({
+		// 	name:user.name,
+		// 	email:user.email,
+		// 	type:"Withdrawal", amount:withdraw,
+		// 	balance:user.balance,
+		// 	timestamp:new Date()
+		// });
+		// setShowWithdraw(false);
 	}
 
 	function clearForm() {
@@ -130,7 +152,7 @@ function Depositwithdraw() {
 					) : (
 						<>
 							<h5 className="my-3">Success!</h5>
-							<button type="submit" id ="depositButton" className="btn btn-light" onClick={clearForm}>New Deposit</button>
+							<button type="submit" id ="depositButton" className="btn btn-light" onClick={clearForm}>Continue</button>
 						</>
 					)}
 				/>
@@ -152,7 +174,7 @@ function Depositwithdraw() {
 					) : (
 						<>
 							<h5 className="my-3">Success!</h5>
-							<button type="submit" className="btn btn-light" onClick={clearForm}>New Withdrawal</button>
+							<button type="submit" className="btn btn-light" onClick={clearForm}>Continue</button>
 						</>
 					)}
 				/>

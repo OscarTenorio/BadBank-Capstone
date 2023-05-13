@@ -1,19 +1,18 @@
 import React from 'react';
-import UserContext from './userContext';
-import ReferenceLinks from './referencelinks';
+import UserContext from './Context/userContext';
 
-function AllData() {
+function History() {
 	const ctx = React.useContext(UserContext);
+	// const {user} = React.useContext(UserContext);
+	const userObject = ctx.user
 
 	// ============================================== UserHistoryEntry()
 	function UserHistoryEntry(props) {
 		// computes history data into a table row
-		let formattedTimestamp = String(props.historyentry.timestamp).substr(0, 21)
-
 		return (
 			<tr>
 				<th scope="row">{props.id + 1}</th>
-				<td>{formattedTimestamp}</td>
+				<td>{props.historyentry.timestamp}</td>
 				<td>{props.historyentry.type}</td>
 				<td>${props.historyentry.amount}</td>
 				<td>${props.historyentry.balance}</td>
@@ -51,7 +50,7 @@ function AllData() {
 						}
 					</tbody>
 				</table>
-				{ props.user.blank ? 
+				{ props.user.history.length < 1 ? 
 					(<div className="mx-auto" style={{paddingTop: "4rem"}}>
 						<h2 className="text-center" style={{color: "lightgray"}}>Wow, So Much Nothing</h2>
 						<p className="text-center" style={{color: "lightgray"}}>Try visiting the Deposit/Withdraw tab as this User first</p>
@@ -65,26 +64,24 @@ function AllData() {
 	}
 
 	// ==============================================	// AllUsersHistory()
-	function AllUsersHistory(props) {
-		// generates a history table per user
+	// function AllUsersHistory(props) {
+	// 	// generates a history table per user
 
-		return props.users.map((user, index) => {
-			return (
-				<div style={{overflow:"scroll"}}>
-					<UserHistoryTable user={user} key={index} id={index}/>
-				</div>
-			)
-		})
-	}
+	// 	return props.users.map((user, index) => {
+	// 		return (
+	// 			<div style={{overflow:"scroll"}}>
+	// 				<UserHistoryTable user={props.user} key={1} id={1}/>
+	// 			</div>
+	// 		)
+	// 	})
+	// }
 
 	// ============================================== return statement for AllData()
 	return (
 		<>
-			<ReferenceLinks/>
 			<div className="p-5">
-				<h1 className="text-center mb-0">All Data</h1>
-				<p className="text-center font-italic mb-4">across all accounts</p>
-				<AllUsersHistory users={ctx.users} key={1} id={1}/>
+				<h1 className="text-center mb-0">Account Activity</h1>
+				<UserHistoryTable user={userObject} key={1} id={1}/>
 			</div>
 		</>
 	);
@@ -111,4 +108,4 @@ function AllData() {
 
 } // end AllData()
 
-export default AllData;
+export default History;

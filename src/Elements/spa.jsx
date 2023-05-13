@@ -4,18 +4,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 // Components =================
 import NotLoggedIn from './notLoggedIn';
 import LoggedIn from './loggedIn';
-import NavBar from './navbar';
+import NavBar from './Components/navbar';
 import Depositwithdraw from "./depositwithdraw";
-import AllData from "./alldata";
-import UserContext from './userContext';
-import LoggedInUser from './loggedInUser';
-import ReferenceLinks from './referencelinks';
+import History from "./history";
+import AllData from './allData';
+import UserContext from './Context/userContext';
+import LoggedInUser from './Components/loggedInUser';
+import ReferenceLinks from './Components/referencelinks';
 
 function Spa() {
   const [user, setUser] = React.useState({});
   const userValue = React.useMemo(() => ({ user, setUser }), [user]);
-
-  console.log('SPA memoized value: ', userValue);
+  // console.log('SPA memoized value: ', userValue);
 
   return (
     <>
@@ -32,8 +32,8 @@ function Spa() {
           <Routes>
             { Object.keys(userValue.user).length > 0 ? (<Route path="/" element={<LoggedIn user={userValue}/>} exact/>) : (<Route path="/" element={<NotLoggedIn/>} exact/>)}
             <Route path="/depositwithdraw/" element={<Depositwithdraw/>}/>
-            <Route path="/balancehistory/" element={<AllData/>}/>
-            {/* <Route path="/alldatagraderequirement/" element={<AllDataGradeRequirement/>}/> */}
+            <Route path="/balancehistory/" element={<History/>}/>
+            <Route path="/alldata/" element={<AllData/>}/>
           </Routes>
         </UserContext.Provider>
       </HashRouter>

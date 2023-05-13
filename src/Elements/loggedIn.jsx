@@ -1,9 +1,9 @@
 import React from 'react';
-import NewFeatures from './upcomingFeatures';
-import AtAGlance from './atAGlance';
+import NewFeatures from './Components/upcomingFeatures';
+import AtAGlance from './Components/atAGlance';
 
 function LoggedIn(user) {
-	console.log('LOGGEDIN user context: ', user)
+	// console.log('LOGGEDIN user context: ', user)
 	const userObject = user.user.user
 	// ====== Time-related code =======
 	let hour = new Date().getHours();
