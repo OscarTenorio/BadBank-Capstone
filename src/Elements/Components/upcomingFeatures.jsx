@@ -18,12 +18,15 @@ function NewFeatures() {
 								&#8594; Enrollment in different account types<br></br>
 								&#8594; Test coverage using Jest<br></br>
 								&#8594; Different authentication levels for users<br></br>
+								&#8594; Login Error Handling<br></br>
 								<br></br>
 							</p>
 						</span>
-						<p className="text-center">Stay tuned for more!</p>
 					</>)}
 				/>
+			</div>
+			<div>
+				<p className="text-center">Stay tuned for more!</p>
 			</div>
 		</>
 	);

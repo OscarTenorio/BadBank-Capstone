@@ -35,9 +35,9 @@ function History() {
 				<table className="table">
 					<thead key={props.id}>
 						<tr>
-							<th scope="col">#</th>
+							<th scope="col"><p>#</p></th>
 							<th scope="col">When</th>
-							<th scope="col">Activity Type</th>
+							<th scope="col">Transaction Type</th>
 							<th scope="col">Amount</th>
 							<th scope="col">Balance</th>
 						</tr>

@@ -10,7 +10,8 @@ function Login() {
 	const [password, setPassword] 		= React.useState('');
 	const {user, setUser}				= React.useContext(UserContext);
 
-	function validate(field, label) {					// basic validation stuff
+	// basic validation stuff
+	function validate(field, label) {
 		if (!field) {
 			setStatus('ERROR: ' + label + ' cannot be blank');
 			setTimeout(() => setStatus('* Required'), 5000);
@@ -19,18 +20,6 @@ function Login() {
 		setLoginButton(true);
 		return true;
 	}
-
-	// function handleLogin(context) {
-	// 	if (!validate(email, 		'email')) return;
-	// 	if (!validate(password, 'password')) return;
-	// 	console.log("handleLogin context: ", context);
-	// 	context.forEach(entry => {
-	// 		if (entry.loggedIn === true) {
-	// 			entry.loggedIn = false;
-	// 		}
-	// 	});
-	// 	TODO ^^^^
-	// };
 
 	function buttonClass() {
 		if (loginButton) {
@@ -68,16 +57,14 @@ function Login() {
 		(async () => {
 			var res = await fetch(endpointUrl + `/account/login/${email}/${password}`);
 			var jsonResponse = await res.json();
-			console.log('ASYNC LOGIN db call - Login Data: ', JSON.stringify(jsonResponse));
-			console.log("JSON.stringify(jsonResponse).includes('failed'): ", JSON.stringify(jsonResponse).includes('failed'))
-
+			
 			// throw error if login failed
 			if (JSON.stringify(jsonResponse).includes('failed')){
 				setStatus('Email or Password are incorrect');
 				setTimeout(() => setStatus('* Required'), 5000);
 			} else {
 				setShow(false);
-				// setStatus(false);
+				setStatus('');
 				setLoginButton(false);
 				// update current user state after 5 seconds
 				setTimeout(() => {

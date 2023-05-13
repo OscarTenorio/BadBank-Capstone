@@ -18,7 +18,7 @@ function LoggedInUser(current){
         <p className="text-primary text-end">{String(userObject.email)}</p>
       </div>
       <div className="text-end m-3">
-        <button className="btn btn-outline-primary text-center" id="logout" onClick={logout}>&#8614; Logout</button>
+        <button className="btn btn-outline-primary text-center" id="test" aria-current="page" href="#" onClick={logout}>&#8614; Logout</button>
       </div>
     </div>
   )

@@ -29,7 +29,7 @@ function find(email) {
             .collection('users')
             .find({ email: email })
             .toArray(function (err, docs) {
-                err ? reject(err) : resolve(docs);
+                err ? resolve(err) : resolve(docs);
             });
     })
 }

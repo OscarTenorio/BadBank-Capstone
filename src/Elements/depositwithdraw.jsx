@@ -142,17 +142,23 @@ function Depositwithdraw() {
 					status={depositStatus}
 					text={showDeposit ? (
 						<>
-							<p>Deposit Amount:</p>
+							<div className="text-center">
+								<p>Deposit Amount:</p>
+							</div>
 							<input type="number" className="form-control" id="deposit" placeholder="Enter Deposit"
 								value={deposit} onChange={e => { setDeposit(e.currentTarget.value); setDespositButton(true) }}
 							/>
 							<br/>
-							<button type="submit" className={buttonClass("depositButton")} onClick={handleDeposit}>Deposit</button>
+							<div className="text-center">
+								<button type="submit" className={buttonClass("depositButton")} onClick={handleDeposit}>Deposit</button>
+							</div>
 						</>
 					) : (
 						<>
-							<h5 className="my-3">Success!</h5>
-							<button type="submit" id ="depositButton" className="btn btn-light" onClick={clearForm}>Continue</button>
+							<h5 className="my-3 text-center">Success!</h5>
+							<div className="text-center">
+								<button type="submit" className="btn btn-light mb-2 mt-4" onClick={clearForm}>Continue</button>
+							</div>
 						</>
 					)}
 				/>
@@ -164,17 +170,23 @@ function Depositwithdraw() {
 					status={withdrawStatus}
 					text={showWithdraw ? (
 						<>
-							<p>Withdrawal Amount:</p>
+							<div className="text-center">
+								<p>Withdrawal Amount:</p>
+							</div>
 							<input type="number" className="form-control" id="withdraw" placeholder="Enter Withdrawal"
 								value={withdraw} onChange={e => { setWithdraw(e.currentTarget.value); setWithdrawButton(true) }}
 							/>
 							<br/>
-							<button type="submit" id ="withdrawButton" className={buttonClass("withdrawButton")} onClick={handleWithdraw}>Withdraw</button>
+							<div className="text-center">
+								<button type="submit" id ="withdrawButton" className={buttonClass("withdrawButton")} onClick={handleWithdraw}>Withdraw</button>
+							</div>
 						</>
 					) : (
 						<>
-							<h5 className="my-3">Success!</h5>
-							<button type="submit" className="btn btn-light" onClick={clearForm}>Continue</button>
+							<h5 className="my-3 mx-auto text-center">Success!</h5>
+							<div className="text-center">
+								<button type="submit" className="btn btn-light mb-2 mt-4" onClick={clearForm}>Continue</button>
+							</div>
 						</>
 					)}
 				/>
