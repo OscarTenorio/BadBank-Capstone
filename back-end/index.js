@@ -21,7 +21,7 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
 			}
 			else{
 				// else create user
-				dal.create(req.params.name,req.params.email,req.params.password)
+				dal.create(req.params.name, req.params.email, req.params.password)
 					.then((user) => {
 							console.log(user);
 							res.send(user);            
@@ -102,6 +102,6 @@ app.get('/account/all', function (req, res) {
     });
 });
 
-var port = 3001;
+var port = 3006;
 app.listen(port);
 console.log('Running on port: ' + port);
