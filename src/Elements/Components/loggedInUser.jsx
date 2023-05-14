@@ -7,8 +7,8 @@ function LoggedInUser(current){
   const {user, setUser}							= React.useContext(UserContext);
   const navigation = useNavigate();
   // console.log('LOGGED IN user context: ',user);
-  // const url = "http://localhost:3000/"
-  const url = "http://165.227.220.118:3000/"
+  const url = "http://localhost:3000/"
+  // const url = "http://165.227.220.118:3000/"
 
   const logout = () => {
     setUser({});

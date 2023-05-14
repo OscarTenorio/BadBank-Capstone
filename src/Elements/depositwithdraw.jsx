@@ -7,8 +7,8 @@ import Balance from './Components/balance';
 function Depositwithdraw() {
 	const {user, setUser}				= React.useContext(UserContext);
 	// console.log('DEPWITH user value: ', user)
-	// const endpointUrl = 'http://localhost:3001';
-	const endpointUrl = 'http://165.227.220.118:3001';
+	const endpointUrl = 'http://localhost:3001';
+	// const endpointUrl = 'http://165.227.220.118:3001';
 
 	const [deposit, setDeposit] 								= React.useState(0);
 	const [withdraw, setWithdraw] 							= React.useState(0);
