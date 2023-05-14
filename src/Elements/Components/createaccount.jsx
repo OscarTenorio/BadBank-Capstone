@@ -27,8 +27,8 @@ function CreateAccount() {
 	}
 
 	function handleCreate() {
-		const endpointUrl = 'http://localhost:3006';
-		// const endpointUrl = 'http://165.227.220.118:3006';
+		// const endpointUrl = 'http://localhost:3006';
+		const endpointUrl = 'http://165.227.220.118:3006';
 
 		// validate entry =======================
 		if (!validate(name, 'name')) return;
