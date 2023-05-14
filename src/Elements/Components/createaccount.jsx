@@ -38,7 +38,7 @@ function CreateAccount() {
 
 		// store in db =======================
 		(async () => {
-			var res = await fetch(`/api/account/create/${name}/${email}/${password}`);
+			var res = await fetch(endpointUrl + `/account/create/${name}/${email}/${password}`);
 			var jsonResponse = await res.json();
 			console.log('CREATE ACCOUNT JSON response: ',jsonResponse);
 		})();
