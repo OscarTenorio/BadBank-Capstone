@@ -2,9 +2,7 @@ import React from 'react';
 import UserContext from './Context/userContext';
 
 function History() {
-	// const ctx = React.useContext(UserContext);
 	const {user} = React.useContext(UserContext);
-	// const userObject = ctx.user
 
 	// ============================================== UserHistoryEntry()
 	function UserHistoryEntry(props) {

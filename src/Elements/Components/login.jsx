@@ -47,8 +47,8 @@ function Login() {
 	};
 
 	function handleLogin() {
-		const endpointUrl = 'http://localhost:3006';
-		// const endpointUrl = 'http://165.227.220.118:3006';
+		// const endpointUrl = 'http://localhost:3006';
+		const endpointUrl = 'http://165.227.220.118:3006';
 
 		if (!validate(email, 		'email')) return;
 		if (!validate(password, 'password')) return;
