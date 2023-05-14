@@ -2,9 +2,9 @@ import React from 'react';
 import UserContext from './Context/userContext';
 
 function History() {
-	const ctx = React.useContext(UserContext);
-	// const {user} = React.useContext(UserContext);
-	const userObject = ctx.user
+	// const ctx = React.useContext(UserContext);
+	const {user} = React.useContext(UserContext);
+	// const userObject = ctx.user
 
 	// ============================================== UserHistoryEntry()
 	function UserHistoryEntry(props) {
@@ -63,48 +63,16 @@ function History() {
 		);
 	}
 
-	// ==============================================	// AllUsersHistory()
-	// function AllUsersHistory(props) {
-	// 	// generates a history table per user
-
-	// 	return props.users.map((user, index) => {
-	// 		return (
-	// 			<div style={{overflow:"scroll"}}>
-	// 				<UserHistoryTable user={props.user} key={1} id={1}/>
-	// 			</div>
-	// 		)
-	// 	})
-	// }
 
 	// ============================================== return statement for AllData()
 	return (
 		<>
 			<div className="p-5">
 				<h1 className="text-center mb-0">Account Activity</h1>
-				<UserHistoryTable user={userObject} key={1} id={1}/>
+				<UserHistoryTable user={user} key={1} id={1}/>
 			</div>
 		</>
 	);
-
-	// gotta figure out where to toss this, this is how the lecture connected the front-end to the back-end
-	// const [data, setData] = React.useState('');
-
-	// React.useEffect(() => {
-	// 	// fetch all accounts from API
-	// 	fetch('/account/all')
-	// 		.then(response => response.json())
-	// 		.then(data => {
-	// 			console.log(data);
-	// 			setData(JSON.stringify(data));
-	// 	});
-	// }, []);
-
-	// return (<>
-	// 	<h5>All Data in Store:</h5>
-	// 	{data}
-	// </>);
-
-
 
 } // end AllData()
 

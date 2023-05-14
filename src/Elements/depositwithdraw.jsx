@@ -7,7 +7,8 @@ import Balance from './Components/balance';
 function Depositwithdraw() {
 	const {user, setUser}				= React.useContext(UserContext);
 	// console.log('DEPWITH user value: ', user)
-	const endpointUrl = 'http://localhost:3001';
+	// const endpointUrl = 'http://localhost:3001';
+	const endpointUrl = 'http://165.227.220.118:3001';
 
 	const [deposit, setDeposit] 								= React.useState(0);
 	const [withdraw, setWithdraw] 							= React.useState(0);
@@ -61,23 +62,20 @@ function Depositwithdraw() {
 		user.history.push(historyEntry);
 		setShowDesposit(false);
 
-
-		let latestHistoryEntry = user.history[user.history.length - 1]
+	
 		// enter deposit into DB =======================================
 		(async () => {
-			var res = await fetch(endpointUrl + `/account/update/Deposit/${latestHistoryEntry.name}/${latestHistoryEntry.email}/
-				${latestHistoryEntry.amount}/${latestHistoryEntry.balance}/${latestHistoryEntry.timestamp}`);
+			var res = await fetch(endpointUrl + `/account/update/Deposit/${user.history[user.history.length - 1].name}/${user.history[user.history.length - 1].email}/
+				${user.history[user.history.length - 1].amount}/${user.history[user.history.length - 1].balance}/${user.history[user.history.length - 1].timestamp}`);
 			var jsonResponse = await res.json();
 			console.log('DEPOSIT JSON response: ',jsonResponse);
 		})();
-
 	}
 
 	function handleWithdraw() {
 		let now = String(new Date()).substr(0, 21)
 		let formattedTimestamp = now.substring(0, 15) + " @" + now.substring(15, now.length)
-		let last = user.history.length - 1
-
+		
 
 		if (!validate(withdraw, 'withdraw')) {
 			clearForm();
@@ -96,22 +94,14 @@ function Depositwithdraw() {
 		user.history.push(historyEntry);
 		setShowWithdraw(false);
 
+
 		// enter withdrawal into db =======================================
 		(async () => {
-			var res = await fetch(endpointUrl + `/account/update/Withdrawal/${user.history[last].name}/${user.history[last].email}/
-				${user.history[last].amount}/${user.history[last].balance}/${user.history[last].timestamp}`);
+			var res = await fetch(endpointUrl + `/account/update/Withdrawal/${user.history[user.history.length - 1].name}/${user.history[user.history.length - 1].email}/
+				${user.history[user.history.length - 1].amount}/${user.history[user.history.length - 1].balance}/${user.history[user.history.length - 1].timestamp}`);
 			var jsonResponse = await res.json();
 			console.log('WITHDRAWAL JSON response: ',jsonResponse);
 		})();	
-
-		// user.history.push({
-		// 	name:user.name,
-		// 	email:user.email,
-		// 	type:"Withdrawal", amount:withdraw,
-		// 	balance:user.balance,
-		// 	timestamp:new Date()
-		// });
-		// setShowWithdraw(false);
 	}
 
 	function clearForm() {

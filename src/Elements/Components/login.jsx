@@ -8,7 +8,7 @@ function Login() {
 	const [loginButton, setLoginButton] = React.useState(false)
 	const [email, setEmail] 			= React.useState('');
 	const [password, setPassword] 		= React.useState('');
-	const {user, setUser}				= React.useContext(UserContext);
+	const {setUser}				= React.useContext(UserContext);
 
 	// basic validation stuff
 	function validate(field, label) {
@@ -47,7 +47,8 @@ function Login() {
 	};
 
 	function handleLogin() {
-		const endpointUrl = 'http://localhost:3001';
+		// const endpointUrl = 'http://localhost:3001';
+		const endpointUrl = 'http://165.227.220.118:3001';
 
 		if (!validate(email, 		'email')) return;
 		if (!validate(password, 'password')) return;

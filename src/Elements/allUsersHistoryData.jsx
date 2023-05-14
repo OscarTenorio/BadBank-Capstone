@@ -1,8 +1,11 @@
 import React from 'react';
+import UserContext from './Context/userContext';
 
 function AllUsersHistoryData() {
-	const endpointUrl = 'http://localhost:3001';
+	// const endpointUrl = 'http://localhost:3001';
+	const endpointUrl = 'http://165.227.220.118:3001';
 	const [data, setData] = React.useState(null);
+	const {user}				= React.useContext(UserContext);
 
 
 	// db query ========================
@@ -14,7 +17,7 @@ function AllUsersHistoryData() {
 		setData(jsonResponse);
 	}
 	fetchData().catch(console.error);
-	}, []);
+	}, [user]);
 
 	// ============================================== UserHistoryEntry()
 	function UserHistoryEntry(props) {

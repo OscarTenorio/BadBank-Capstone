@@ -3,16 +3,6 @@ import CreateAccount from './Components/createaccount';
 import Login from './Components/login';
 
 function NotLoggedIn() {
-	// const {user, setUser} = React.useContext(UserContext);
-
-	// const [dshow, setDshow] 							= React.useState(true);
-
-	// setTimeout(() => {
-	// 	console.log(Object.keys(userValue.user).length < 1)
-	// 	console.log(Object.keys(userValue.user).length)
-	// }, 0);
-	// const userValue = React.useMemo(() => ({ user, setUser }), [user]);
-	// const display = React.useMemo(() => ({ dshow, setDshow }), [dshow]);
 
 	return(
 		<>
